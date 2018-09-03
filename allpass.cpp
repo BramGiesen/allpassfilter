@@ -13,17 +13,21 @@ Allpass::Allpass(int bufferSize) : bufferSize(bufferSize), delayBuffer(bufferSiz
   jack.autoConnect();
   samplerate = (float)jack.getSamplerate();
 
-  std::thread audioThread(audioProcess);
+  // audioThread = new std::thread(&Allpass::audioProcess, this);
+
+
+  std::cout << "hallo" << std::endl;
 }
 
 Allpass::~Allpass()
 {
-  audioThread.join();
+  // audioThread->join();
 
 }
 
 float Allpass::filterProcess(float signalIn)
 {
+  std::cout << "signalIn  = " << signalIn << std::endl;
   //y[n] = 0.167772 (x[n] + y[n-8]) - x[n-8]
   static float coef = 0.167772;
   static int index = 0;

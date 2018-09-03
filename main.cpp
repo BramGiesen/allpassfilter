@@ -31,7 +31,7 @@ int main(int argc,char **argv)
   bool running = true;
   while (running)
   {
-    allpass.audioProcess();
+    // allpass.audioProcess();
       switch (std::cin.get())
       {
           case 'q':

@@ -22,6 +22,8 @@ private:
   double samplerate = 44100;
 
   std::vector<double> delayBuffer;
+
+  std::thread* audioThread;
 };
 
 
