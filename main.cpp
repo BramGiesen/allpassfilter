@@ -1,37 +1,37 @@
 #include <iostream>
-#include <thread>
-#include <stdlib.h>     /* strtol */
+#include "audioProcess.h"
+#include "allpassFilter.h"
 
-#include "jack_module.h"
-#include "math.h"
-#include "allpass.h"
-
-#define PI_2 6.28318530717959
-
-
+#define DEBUG 0
 
 int main(int argc,char **argv)
 {
-  char * pOrder;
-  long int order;
+  AudioProcess aProcess;
 
-  if(argv[1] != nullptr){
-    order = strtol (argv[1],&pOrder,10);
-    if(order > 0){
-        Allpass allpass(order);
-    } else {
-      std::cout << "please enter a number higher then 0" << std::endl;
+  AllpassFilter allpass;
+
+  static int xx = 0;
+
+  for (int i = -8; i < 1; i++){
+    if(i == -8){
+      xx = 1;
     }
-  } else {
-    std::cout << "null" << std::endl;
+    else{
+      xx = 0;
+    }
+    double output = allpass.process(xx);
+
+    #if (DEBUG == 1)
+      std::cout << "xx = " << xx << std::endl;
+      std::cout << "output = " << output << std::endl;
+    #endif
   }
 
-  std::cout << "\n\nPress 'q' when you want to quit the program.\n";
-
-  bool running = true;
+  bool running = false;
+  if (running)
+    std::cout << "\n\nPress 'q' when you want to quit the program.\n";
   while (running)
   {
-    // allpass.audioProcess();
       switch (std::cin.get())
       {
           case 'q':
@@ -39,6 +39,6 @@ int main(int argc,char **argv)
             break;
       }
   }
-
+  //end the program
   return 0;
 } // main()
