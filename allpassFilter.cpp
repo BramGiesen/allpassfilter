@@ -28,3 +28,5 @@ double AllpassFilter::process(double input)
 
   return filterOutput;
 }
+
+//used this resource for the filter implementation http://home.hku.nl/~pieter.suurmond/EDU/mt/higher_order_allpass/
