@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <thread>
+#include <string>
 
 #include "jack_module.h"
 #include "allpassFilter.h"
@@ -11,12 +12,17 @@
 class AudioProcess
 {
 public:
-  AudioProcess();
+  AudioProcess(std::string jackName);
   ~AudioProcess();
   void process();
+  void switchF(int s);
 private:
+  int s = 2;
+
   JackModule jack;
-  AllpassFilter allpass;
+  AllpassFilter **allpassFilters;
+  AllpassFilter *allpass;
+  AllpassFilter *allpass1;
 };
 
 #endif // _H_AUDIOPROCESS_
